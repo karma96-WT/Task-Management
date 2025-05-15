@@ -10,7 +10,7 @@ export async function POST(req) {
   const body = await req.json();
   const { username, password } = body;
 
-  const user = await prisma.user.findUnique({
+  const user = await prisma.user.findFirst({
     where: { username },
   });
 
@@ -28,8 +28,5 @@ export async function POST(req) {
     path: '/',
     maxAge: 60 * 60 * 24, // 1 days
   });
-
-
-
   return NextResponse.json({ token });
 }
